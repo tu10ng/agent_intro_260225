@@ -1127,19 +1127,62 @@ claude
                     <h2>工具组合策略 - 研究生的局限</h2>
                     <div class="grad-analogy">
                         <strong>还记得研究生比喻吗？</strong><br>
-                        再能干的研究生也有局限——他可能不知道昨天刚发布的新框架
+                        再能干的研究生也有局限——他可以上网查资料，但有些门进不去
                     </div>
                     <div class="warning-box" style="margin-top: 20px;">
-                        <strong>Claude Code 的局限：</strong><br>
-                        擅长"动手改代码"，不擅长"查最新资料"（不能联网）
+                        <strong>Claude Code 的联网能力：有，但有局限</strong><br>
+                        能搜索、能抓取网页，但需登录的页面打不开
                     </div>
                     <div class="think-box" style="margin-top: 20px;">
                         <strong>想一想：</strong><br>
-                        你上次写代码时，有哪些信息是需要上网查的？<br>
-                        <span class="small-text">（新库文档？最佳实践？版本兼容性？）</span>
+                        你上次写代码时，查的资料有多少是公开的？多少需要登录？<br>
+                        <span class="small-text">（公开文档？还是内部Wiki、Jira、Google Docs？）</span>
                     </div>
                 </section>
-                <!-- 子页面2：不同AI工具的"人设" -->
+                <!-- 子页面2：联网能力详解（双轨制） -->
+                <section>
+                    <h2>Claude Code 联网能力详解</h2>
+                    <table class="tool-table" style="font-size: 0.8em;">
+                        <tr>
+                            <th>能力</th>
+                            <th>新手理解</th>
+                            <th>老手用法</th>
+                        </tr>
+                        <tr>
+                            <td>搜索</td>
+                            <td>能帮你谷歌一下</td>
+                            <td><code>WebSearch</code></td>
+                        </tr>
+                        <tr>
+                            <td>抓取</td>
+                            <td>能打开公开网页</td>
+                            <td><code>WebFetch</code></td>
+                        </tr>
+                    </table>
+                    <table class="tool-table" style="font-size: 0.8em; margin-top: 15px;">
+                        <tr>
+                            <th>场景</th>
+                            <th>能不能用</th>
+                            <th>替代方案</th>
+                        </tr>
+                        <tr>
+                            <td>公开文档</td>
+                            <td style="color: green;">能</td>
+                            <td>直接让它搜/抓</td>
+                        </tr>
+                        <tr>
+                            <td>需登录（Jira、Google Docs）</td>
+                            <td style="color: red;">不能</td>
+                            <td>你打开后粘贴给它</td>
+                        </tr>
+                        <tr>
+                            <td>GitHub PR/Issue</td>
+                            <td style="color: green;">能</td>
+                            <td>用 <code>gh</code> CLI 更好</td>
+                        </tr>
+                    </table>
+                </section>
+                <!-- 子页面3：不同AI工具的"人设" -->
                 <section>
                     <h2>不同AI工具各有所长</h2>
                     <div class="think-box" style="margin-bottom: 20px;">
@@ -1152,45 +1195,46 @@ claude
                             <th>擅长</th>
                         </tr>
                         <tr>
-                            <td>ChatGPT</td>
+                            <td>Gemini</td>
                             <td>头脑风暴伙伴</td>
                             <td>讨论需求、发散思路</td>
                         </tr>
                         <tr>
                             <td>Grok / Perplexity</td>
-                            <td>搜索引擎+</td>
-                            <td>查最新资料、技术选型</td>
+                            <td>深度搜索专家</td>
+                            <td>深度调研、多源对比、技术选型</td>
                         </tr>
                         <tr>
                             <td>Claude Code</td>
-                            <td>执行者</td>
-                            <td>读代码、改代码、跑命令</td>
+                            <td>能上网的执行者</td>
+                            <td>读代码、改代码、跑命令、简单搜索</td>
                         </tr>
                     </table>
                     <div class="tip-box" style="margin-top: 20px;">
-                        <strong>选择原则：</strong>用对的工具做对的事，不要指望一个工具搞定所有
+                        <strong>选择原则：</strong>简单查询让Claude Code自己搜，深度调研用专门工具
                     </div>
                 </section>
-                <!-- 子页面3：实战Workflow -->
+                <!-- 子页面4：实战Workflow -->
                 <section>
                     <h2>实战Workflow</h2>
                     <div class="workflow-diagram" style="text-align: center; font-size: 0.95em;">
                         <div style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;">
-                            <div class="step-item">需求阶段<br><span class="small-text">→ ChatGPT讨论</span></div>
+                            <div class="step-item">需求阶段<br><span class="small-text">→ Gemini讨论</span></div>
                             <div class="cycle-arrow">→</div>
-                            <div class="step-item">选型阶段<br><span class="small-text">→ Grok查资料</span></div>
+                            <div class="step-item">选型阶段<br><span class="small-text">→ Grok深度调研</span></div>
                             <div class="cycle-arrow">→</div>
                             <div class="step-item">实现阶段<br><span class="small-text">→ Claude Code</span></div>
                             <div class="cycle-arrow">→</div>
                             <div class="step-item">调试阶段<br><span class="small-text">→ 日志+Claude</span></div>
                         </div>
                     </div>
-                    <div class="highlight-box" style="margin-top: 25px;">
-                        <strong>完整示例：</strong><br>
-                        "想用新的日志库"<br>
-                        → Grok搜"2024最佳Python日志库"<br>
-                        → 把结果告诉Claude Code<br>
-                        → Claude帮你集成到项目中
+                    <div class="highlight-box" style="margin-top: 20px; font-size: 0.9em;">
+                        <strong>场景区分：</strong><br>
+                        <ul style="margin: 8px 0 0 0;">
+                            <li><strong>简单查询</strong>（"这个错误啥意思"）→ Claude Code 直接搜</li>
+                            <li><strong>深度调研</strong>（"2024最佳日志库对比"）→ Grok搜，结果给Claude</li>
+                            <li><strong>私有内容</strong>（内部文档、Jira）→ 你打开后粘贴给它</li>
+                        </ul>
                     </div>
                 </section>
             </section>
@@ -1238,19 +1282,17 @@ claude
             <!-- 第24页：第三部分小结 [新增] -->
             <section class="center">
                 <h2>第三部分小结</h2>
-                <div class="think-box">
-                    <strong>不看下面的答案，回答这两个问题：</strong><br><br>
-                    1. 项目后期让AI改代码，最重要的是什么？<br>
-                    2. 调试时，比起口头描述bug，更好的做法是？<br><br>
-                    <span class="small-text">（给自己5秒想答案...再往下看）</span>
+                <div class="think-box" style="padding: 15px;">
+                    <strong>快问快答：</strong><br>
+                    1. 复杂任务最重要的是？ 2. 调试时比口头描述更好的做法？
                 </div>
-                <div class="fragment summary-box">
-                    <strong>答案 & 要点回顾：</strong>
-                    <ul>
-                        <li><strong>复杂任务 → /plan 模式</strong>（先画图纸再装修，review AI思路）</li>
-                        <li><strong>调试 → 给AI看日志</strong>（结构化信息 >> 口头描述）</li>
-                        <li><strong>大项目 → 多Agent并行</strong>（多个研究生分工协作）</li>
-                        <li><strong>工具组合</strong>：不同工具各有擅长，组合使用效果最佳</li>
+                <div class="fragment summary-box" style="padding: 18px; font-size: 0.9em;">
+                    <strong>答案：</strong>
+                    <ul style="margin: 10px 0 0 0;">
+                        <li><strong>复杂任务 → /plan 模式</strong>（先规划再执行）</li>
+                        <li><strong>调试 → 给AI看日志</strong>（结构化 >> 口头描述）</li>
+                        <li><strong>大项目 → 多Agent并行</strong>（分工协作）</li>
+                        <li><strong>工具组合</strong>：简单搜索让Claude搜，深度调研用专门工具</li>
                     </ul>
                 </div>
             </section>
@@ -1260,23 +1302,19 @@ claude
             <!-- 第25页：什么时候用/不用 + 判断练习 -->
             <section>
                 <h2>什么时候用 / 不用</h2>
-                <div class="highlight-box" style="margin-bottom: 15px;">
-                    <strong>判断原则：</strong>这个任务适合"循环式、渐进式"地完成吗？
-                </div>
-                <div class="comparison">
-                    <div class="comparison-item new">
-                        <h3>✅ 适合</h3>
-                        <ul>
+                <div class="comparison" style="font-size: 0.85em;">
+                    <div class="comparison-item new" style="padding: 15px;">
+                        <h3 style="margin-top: 0;">✅ 适合</h3>
+                        <ul style="margin: 0;">
                             <li>重复性任务（批量改动）</li>
                             <li>探索陌生代码库</li>
                             <li>快速原型开发</li>
                             <li>标准化、可测试的改动</li>
-                            <li>代码解释和学习</li>
                         </ul>
                     </div>
-                    <div class="comparison-item old">
-                        <h3>❌ 不太适合</h3>
-                        <ul>
+                    <div class="comparison-item old" style="padding: 15px;">
+                        <h3 style="margin-top: 0;">❌ 不太适合</h3>
+                        <ul style="margin: 0;">
                             <li>需要深度业务理解的决策</li>
                             <li>高风险且难以验证的改动</li>
                             <li>需要团队讨论的架构设计</li>
@@ -1284,121 +1322,105 @@ claude
                         </ul>
                     </div>
                 </div>
-                <div class="fragment think-box">
-                    <strong>灰色地带判断（想一想再看答案）：</strong><br>
-                    "修改核心支付逻辑的一个参数校验" → ？<br>
-                    <span class="small-text fragment">（✅ 适合 — 改动明确、可测试、用Plan模式review）</span>
-                </div>
-                <div class="fragment think-box" style="margin-top: 10px;">
-                    "在已有架构上加一个新的支付渠道" → ？<br>
-                    <span class="small-text fragment">（⚠️ 谨慎 — 改动范围大，建议先Plan+人工review架构影响）</span>
+                <div class="fragment think-box" style="padding: 12px; font-size: 0.9em;">
+                    <strong>灰色地带：</strong>
+                    "修改支付逻辑的参数校验" → <span class="fragment">✅ 改动明确可测试</span><br>
+                    "加一个新支付渠道" → <span class="fragment">⚠️ 范围大，先Plan+人工review</span>
                 </div>
             </section>
 
             <!-- 第26页：常见误区（上）[原22页拆分] -->
             <section>
                 <h2>常见误区（上）</h2>
-                <div class="think-box" style="margin-bottom: 15px;">
-                    <strong>在看答案之前，想一想：</strong>你觉得新手最容易犯哪种错？
-                </div>
-                <div class="comparison" style="grid-template-columns: 1fr;">
-                    <div class="comparison-item old" style="margin-bottom: 20px;">
-                        <strong>误区1：一次塞太多</strong>
-                        <p><strong>症状：</strong>AI输出质量下降，开始胡说八道，前后矛盾</p>
-                        <p><strong>原因：</strong>上下文窗口（白板）写满了，旧信息被挤掉</p>
-                        <div class="highlight-box" style="background: #e3f2fd; border: none; margin: 10px 0;">
-                            <span class="small-text">↑ 回顾：还记得"会议室白板"吗？这就是白板被写满的后果</span>
-                        </div>
-                        <div class="tip-box" style="background: white;">
-                            <strong>✅ 解法：</strong>拆分任务，复杂任务新开对话，每次聚焦一个点
-                        </div>
-                    </div>
-                    <div class="comparison-item old">
-                        <strong>误区2：盲目信任</strong>
-                        <p><strong>症状：</strong>AI改的代码没测就上线，结果出bug</p>
-                        <p><strong>原因：</strong>AI也会犯错，尤其是边界情况和业务逻辑</p>
-                        <div class="tip-box" style="background: white;">
-                            <strong>✅ 解法：</strong>永远跑一遍测试，关键代码人工review
-                        </div>
-                    </div>
+                <table class="tool-table" style="font-size: 0.85em;">
+                    <tr>
+                        <th style="width: 25%;">误区</th>
+                        <th style="width: 35%;">症状</th>
+                        <th style="width: 40%;">解法</th>
+                    </tr>
+                    <tr>
+                        <td><strong>一次塞太多</strong></td>
+                        <td>AI输出质量下降，前后矛盾<br><span class="small-text">（白板写满了）</span></td>
+                        <td>拆分任务，复杂任务新开对话</td>
+                    </tr>
+                    <tr>
+                        <td><strong>盲目信任</strong></td>
+                        <td>AI改的代码没测就上线出bug</td>
+                        <td>永远跑测试，关键代码人工review</td>
+                    </tr>
+                </table>
+                <div class="think-box" style="margin-top: 20px; padding: 12px;">
+                    <strong>想一想：</strong>这两个误区你犯过吗？
                 </div>
             </section>
 
             <!-- 第27页：常见误区（下）[原22页拆分] -->
             <section>
                 <h2>常见误区（下）</h2>
-                <div class="comparison" style="grid-template-columns: 1fr;">
-                    <div class="comparison-item old" style="margin-bottom: 20px;">
-                        <strong>误区3：不给上下文</strong>
-                        <p><strong>症状：</strong>AI改错文件，或者理解错需求</p>
-                        <p><strong>原因：</strong>AI不知道你的项目结构和当前状态</p>
-                        <div class="highlight-box" style="background: #e3f2fd; border: none; margin: 10px 0;">
-                            <span class="small-text">↑ 回顾：还记得"沟通三要素"吗？这就是缺了"背景"</span>
-                        </div>
-                        <div class="tip-box" style="background: white;">
-                            <strong>✅ 解法：</strong>先让AI读相关文件，说明背景和约束
-                        </div>
-                    </div>
-                    <div class="comparison-item old">
-                        <strong>误区4：放弃太快</strong>
-                        <p><strong>症状：</strong>AI第一次没做好就换方案或放弃</p>
-                        <p><strong>原因：</strong>AI需要反馈才能调整，不是一次就完美</p>
-                        <div class="highlight-box" style="background: #e3f2fd; border: none; margin: 10px 0;">
-                            <span class="small-text">↑ 回顾：Agent是循环的——干一步看一步，需要迭代</span>
-                        </div>
-                        <div class="tip-box" style="background: white;">
-                            <strong>✅ 解法：</strong>追问、给反馈、指出问题让它迭代调整
-                        </div>
-                    </div>
-                </div>
-                <div class="think-box" style="margin-top: 15px;">
-                    <strong>反思一下：</strong>这四个误区，你犯过哪个？<br>
-                    下次遇到类似情况，你会怎么避免？
+                <table class="tool-table" style="font-size: 0.85em;">
+                    <tr>
+                        <th style="width: 25%;">误区</th>
+                        <th style="width: 35%;">症状</th>
+                        <th style="width: 40%;">解法</th>
+                    </tr>
+                    <tr>
+                        <td><strong>不给上下文</strong></td>
+                        <td>AI改错文件，理解错需求<br><span class="small-text">（缺了"背景"）</span></td>
+                        <td>先让AI读相关文件，说明背景</td>
+                    </tr>
+                    <tr>
+                        <td><strong>放弃太快</strong></td>
+                        <td>AI第一次没做好就放弃<br><span class="small-text">（Agent需要迭代）</span></td>
+                        <td>追问、给反馈、让它迭代调整</td>
+                    </tr>
+                </table>
+                <div class="think-box" style="margin-top: 20px; padding: 12px;">
+                    <strong>反思：</strong>四个误区你犯过哪个？下次怎么避免？
                 </div>
             </section>
 
             <!-- 第28页：出问题怎么办 - 急救清单（垂直幻灯片组） -->
             <section>
-                <!-- 子页面1：挂钩点 + 输出质量问题 -->
+                <!-- 子页面1：输出质量问题 -->
                 <section>
-                    <h2>出问题怎么办 - 急救清单</h2>
-                    <div class="highlight-box" style="margin-bottom: 20px;">
-                        <strong>这些急救方法，本质上是在修复Agent循环的哪个环节</strong><br>
-                        感知 / 思考 / 行动 / 观察 → 哪里出了问题？
-                    </div>
-                    <div class="emergency-list">
-                        <p style="margin: 0 0 15px 0; font-size: 1.1em;"><strong>【输出质量问题】</strong> <span class="small-text">← 思考/行动环节出问题</span></p>
-                        <div class="emergency-item">
-                            <strong>AI越改越乱</strong><br>
-                            <code>git checkout .</code> → 新对话重来<br>
-                            <span class="small-text">（上下文已经混乱，不如从头开始）</span>
-                        </div>
-                        <div class="emergency-item" style="border-bottom: none;">
-                            <strong>AI输出质量下降</strong><br>
-                            上下文太长了 → 新开对话<br>
-                            <span class="small-text">（白板写满了，清空重新开始）</span>
-                        </div>
+                    <h2>急救清单（一）输出质量</h2>
+                    <table class="tool-table" style="font-size: 0.85em;">
+                        <tr>
+                            <th style="width: 30%;">问题</th>
+                            <th style="width: 70%;">解法</th>
+                        </tr>
+                        <tr>
+                            <td><strong>AI越改越乱</strong></td>
+                            <td><code>git checkout .</code> → 新对话重来</td>
+                        </tr>
+                        <tr>
+                            <td><strong>输出质量下降</strong></td>
+                            <td>上下文太长 → 新开对话</td>
+                        </tr>
+                    </table>
+                    <div class="tip-box" style="margin-top: 20px; font-size: 0.9em;">
+                        <strong>万能保险：</strong><code>git commit</code> 频繁提交，随时可回退
                     </div>
                 </section>
-                <!-- 子页面2：理解偏差问题 + 万能保险 -->
+                <!-- 子页面2：理解偏差问题 -->
                 <section>
-                    <h2>出问题怎么办 - 急救清单（续）</h2>
-                    <div class="emergency-list">
-                        <p style="margin: 0 0 15px 0; font-size: 1.1em;"><strong>【理解偏差问题】</strong> <span class="small-text">← 感知环节出问题</span></p>
-                        <div class="emergency-item">
-                            <strong>AI不理解需求</strong><br>
-                            给具体例子 + 指定参考文件<br>
-                            <span class="small-text">（让它"看"到正确的信息）</span>
-                        </div>
-                        <div class="emergency-item" style="border-bottom: none;">
-                            <strong>AI改错地方</strong><br>
-                            明确指定路径 + "只改xxx"<br>
-                            <span class="small-text">（缩小它的"感知范围"）</span>
-                        </div>
-                    </div>
-                    <div class="tip-box" style="margin-top: 20px;">
-                        <strong>万能保险：</strong><code>git commit</code> 频繁提交，随时可以回退<br>
-                        <span class="small-text">（改之前commit一次 → 改完commit一次 → 不满意就checkout）</span>
+                    <h2>急救清单（二）理解偏差</h2>
+                    <table class="tool-table" style="font-size: 0.85em;">
+                        <tr>
+                            <th style="width: 30%;">问题</th>
+                            <th style="width: 70%;">解法</th>
+                        </tr>
+                        <tr>
+                            <td><strong>AI不理解需求</strong></td>
+                            <td>给具体例子 + 指定参考文件</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI改错地方</strong></td>
+                            <td>明确指定路径 + "只改xxx"</td>
+                        </tr>
+                    </table>
+                    <div class="highlight-box" style="margin-top: 20px; font-size: 0.9em;">
+                        <strong>本质：</strong>修复Agent循环的"感知"环节 → 让它看到正确的信息
                     </div>
                 </section>
             </section>
@@ -1408,62 +1430,43 @@ claude
             <!-- 第30页：互动演示 -->
             <section class="center">
                 <h2>互动环节</h2>
-                <div class="question-box">
-                    给我一个小任务，<br>现场演示 Claude Code 如何解决
+                <div class="question-box" style="padding: 20px; font-size: 1.1em;">
+                    给我一个小任务，现场演示 Claude Code 如何解决
                 </div>
-                <p class="small-text">
-                    建议任务类型：<br>
-                    添加功能 / 修复bug / 重构代码 / 代码解释
+                <p class="small-text" style="margin-top: 15px;">
+                    建议：添加功能 / 修复bug / 重构代码 / 代码解释
                 </p>
             </section>
 
             <!-- 第31页：回顾总结 -->
             <section class="center">
                 <h2>回顾总结</h2>
-                <div class="roadmap">
-                    <div class="roadmap-item">
-                        <div class="icon">🧠</div>
+                <div class="roadmap" style="margin: 15px 0;">
+                    <div class="roadmap-item" style="padding: 10px;">
+                        <div style="font-size: 1.5em;">🧠</div>
                         <div><strong>AI</strong></div>
                     </div>
                     <div class="roadmap-arrow">→</div>
-                    <div class="roadmap-item">
-                        <div class="icon">🤖</div>
+                    <div class="roadmap-item" style="padding: 10px;">
+                        <div style="font-size: 1.5em;">🤖</div>
                         <div><strong>Agent</strong></div>
                     </div>
                     <div class="roadmap-arrow">→</div>
-                    <div class="roadmap-item">
-                        <div class="icon">💻</div>
+                    <div class="roadmap-item" style="padding: 10px;">
+                        <div style="font-size: 1.5em;">💻</div>
                         <div><strong>Claude Code</strong></div>
                     </div>
                     <div class="roadmap-arrow">→</div>
-                    <div class="roadmap-item">
-                        <div class="icon">🚀</div>
-                        <div><strong>进阶技巧</strong></div>
+                    <div class="roadmap-item" style="padding: 10px;">
+                        <div style="font-size: 1.5em;">🚀</div>
+                        <div><strong>进阶</strong></div>
                     </div>
                 </div>
-                <div class="think-box" style="margin: 20px 0;">
-                    <strong>不看下面，你能说出今天最重要的三个收获吗？</strong><br>
-                    <span class="small-text">（给自己10秒思考时间...）</span>
+                <div class="fragment formula-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 15px;">
+                    <strong>核心Takeaway：</strong>上下文管理是关键 → 塞太多专家变新手
                 </div>
-                <div class="fragment">
-                    <div class="formula-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
-                        <strong style="font-size: 1.1em;">核心Takeaway（如果只能记一句话）：</strong><br>
-                        <span style="font-size: 1.2em;">上下文管理是关键 → 白板有限，塞太多专家变新手</span>
-                    </div>
-                    <div style="margin-top: 15px; font-size: 0.9em;">
-                        <strong>其他要点：</strong>
-                        <ul style="margin-top: 5px;">
-                            <li>Agent = 会动手的AI（研究生比喻）</li>
-                            <li>项目后期用Plan模式</li>
-                            <li>日志是最好的调试沟通</li>
-                            <li>永远验证AI的输出</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="fragment highlight-box" style="margin-top: 20px; text-align: center;">
-                    <strong>回到开场问题：</strong>现在再想想，AI和人类助理的区别是什么？<br>
-                    → Agent让AI从"只会说"变成"会做"<br>
-                    → 但需要你会"驾驶"
+                <div class="fragment" style="margin-top: 15px; font-size: 0.85em;">
+                    <strong>要点：</strong>Agent=会动手的AI | Plan模式 | 日志调试 | 永远验证
                 </div>
             </section>
 
